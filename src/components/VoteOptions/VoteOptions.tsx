@@ -1,6 +1,5 @@
 import css from "./VoteOptions.module.css";
 import type { VoteType } from "../../types/votes";
-import clsx from "clsx";
 
 interface VoteOptionsProps {
   onVote: (type: VoteType) => void;
@@ -19,12 +18,11 @@ function VoteOptions({ onVote, onReset, canReset }: VoteOptionsProps) {
       <button onClick={() => onVote("bad")} className={css.button}>
         Bad
       </button>
-      <button
-        onClick={onReset}
-        className={clsx(css.button, css.reset, !canReset && css.hidden)}
-      >
-        Reset
-      </button>
+      {canReset && (
+        <button onClick={onReset} className={`${css.button} ${css.reset}`}>
+          Reset
+        </button>
+      )}
     </div>
   );
 }
